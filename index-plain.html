@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Taquilla de Cine - MVC</title>
+</head>
+<body>
+    <section id="body">
+        <h2>Taquilla de Cine</h2>
+        <button id="body_btNuevoBoleto2D">Nuevo boleto 2D</button>
+        <button id="body_btNuevoBoleto3D">Nuevo boleto 3D</button>
+        <hr />
+        <h3>Boletos procesados</h3>
+        <ul id="body_listadoBoletos"></ul>
+        <div>Ingreso total de taquilla: $<span id="body_lblIngresoTotal">0</span></div>
+        <div>Precio promedio por boleto: $<span id="body_lblPromPrecio">0</span></div>
+    </section>
+
+    <section id="boleto2D" hidden style="margin-top: 20px; border: 1px solid #ccc; padding: 15px; width: 320px;">
+        <h3>Procesar boleto 2D</h3>
+        <div>
+            <label>Código:
+                <input type="text" id="boleto2D_inCodigo" placeholder="Ingrese código" />
+            </label>
+        </div>
+        <div>
+            <label>Precio base:
+                <input type="number" id="boleto2D_inPrecioBase" placeholder="0" />
+            </label>
+        </div>
+        <div>
+            <label>¿Es matiné?:
+                <select id="boleto2D_inEsMatine">
+                    <option value="1">Sí</option>
+                    <option value="2" selected>No</option>
+                </select>
+            </label>
+        </div>
+        <br />
+        <button id="boleto2D_btCancelar">Cancelar</button>
+        <button id="boleto2D_btAceptar">Aceptar</button>
+    </section>
+
+    <section id="boleto3D" hidden style="margin-top: 20px; border: 1px solid #ccc; padding: 15px; width: 320px;">
+        <h3>Procesar boleto 3D</h3>
+        <div>
+            <label>Código:
+                <input type="text" id="boleto3D_inCodigo" placeholder="Ingrese código" />
+            </label>
+        </div>
+        <div>
+            <label>Precio base:
+                <input type="number" id="boleto3D_inPrecioBase" placeholder="0" />
+            </label>
+        </div>
+        <br />
+        <button id="boleto3D_btCancelar">Cancelar</button>
+        <button id="boleto3D_btAceptar">Aceptar</button>
+    </section>
+
+    <script type="module">
+        import cCine from "./dist/controllers/cCine.js";
+        import cBoleto2D from "./dist/controllers/cBoleto2D.js";
+        import cBoleto3D from "./dist/controllers/cBoleto3D.js";
+        import vCinePlain from "./dist/views/vCinePlain.js";
+        import vBoleto2DPlain from "./dist/views/vBoleto2DPlain.js";
+        import vBoleto3DPlain from "./dist/views/vBoleto3DPlain.js";
+
+        const vistaCine = new vCinePlain();
+        const vistaBoleto2D = new vBoleto2DPlain();
+        const vistaBoleto3D = new vBoleto3DPlain();
+
+        const controladorBoleto2D = new cBoleto2D(vistaBoleto2D);
+        const controladorBoleto3D = new cBoleto3D(vistaBoleto3D);
+        new cCine(vistaCine, controladorBoleto2D, controladorBoleto3D);
+    </script>
+</body>
+</html>
